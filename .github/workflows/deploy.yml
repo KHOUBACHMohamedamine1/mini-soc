@@ -1,0 +1,29 @@
+name: Deploy Mini-SOC
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python & Ansible
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install ansible docker
+
+      - name: Run Ansible Playbook
+        env:
+          WAZUH_PASSWORD: ${{ secrets.WAZUH_PASSWORD }}
+          ELASTIC_PASSWORD: ${{ secrets.ELASTIC_PASSWORD }}
+        run: |
+          source venv/bin/activate
+          ansible-playbook -i ansible/inventory.ini ansible/playbooks/deploy.yml --ask-become-pass
+
