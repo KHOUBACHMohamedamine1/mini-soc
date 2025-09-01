@@ -17,7 +17,7 @@ jobs:
           python3 -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
-          pip install ansible docker
+          pip install ansible docker jsondiff
 
       - name: Run Ansible Playbook
         env:
