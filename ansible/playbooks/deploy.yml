@@ -1,6 +1,4 @@
-- name: Deploy Wazuh Stack on Docker Swarm
-  hosts: swarm_nodes
-  become: yes
+- hosts: localhost
   tasks:
     - name: Ensure Docker Swarm is initialized
       community.docker.docker_swarm:
@@ -12,9 +10,9 @@
         driver: overlay
         state: present
 
-    - name: Deploy Wazuh Stack
+    - name: Deploy Wazuh stack
       community.docker.docker_stack:
-        name: wazuh
         state: present
+        name: wazuh
         compose:
-            - "/home/heelioos/mini-soc/docker/compose/wazuh-stack.yml"
+          - "{{ playbook_dir }}/../../stack/wazuh-stack.yml"
