@@ -17,4 +17,4 @@
         name: wazuh
         state: present
         compose:
-           - "/home/heelioos/mini-soc/docker/compose/wazuh-stack.yml"
+            - "/home/heelioos/mini-soc/docker/compose/wazuh-stack.yml"
