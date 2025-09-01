@@ -1,0 +1,26 @@
+---
+- name: Deploy Wazuh Stack on Docker Swarm
+  hosts: swarm_nodes
+  become: true
+  vars_files:
+    - ../group_vars/all.yml
+
+  tasks:
+
+    - name: Ensure Docker Swarm is initialized
+      docker_swarm:
+        state: present
+
+    - name: Create overlay network
+      docker_network:
+        name: "{{ overlay_network }}"
+        driver: overlay
+        attachable: yes
+
+    - name: Deploy Wazuh Stack
+      docker_stack:
+        state: present
+        name: wazuh
+        compose:
+          - "{{ wazuh_stack_file }}"
+

@@ -1,0 +1,5 @@
+elasticsearch_user: admin
+elasticsearch_password: admin   # later replace with Ansible Vault
+wazuh_stack_file: ../../docker/compose/wazuh-stack.yml
+overlay_network: wazuh-net
+
