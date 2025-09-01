@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build Wazuh images
-        run: docker compose -f stack/wazuh-stack.yml build
+        run: sudo docker compose -f stack/wazuh-stack.yml build
 
       - name: Scan with Trivy
         run: trivy image wazuh/wazuh-manager:4.10.0 --exit-code 1 --severity CRITICAL,HIGH
